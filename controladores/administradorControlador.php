@@ -247,7 +247,32 @@ class administradorControlador extends administradorModelo
             
         }
 
-        $tabla .= '</tbody></table></div>';
+        $tabla.='</tbody></table></div>';
+
+        if($total>=1 && $pagina<=$Npaginas){
+            $tabla.='<nav class="text-center"><ul class="pagination pagination-sm">';
+
+            if($pagina==1){
+                $tabla.='<li class="disabled"><a><i class="zmdi zmdi-arrow-left"></i></a></li>';
+            }else{
+                $tabla.='<li><a href="'.SERVERURL.'adminlist/'.($pagina-1).'/"><i class="zmdi zmdi-arrow-left"></i></a></li>';
+            }
+
+            for($i=1; $i<=$Npaginas; $i++){
+                if($pagina==$i){
+                    $tabla.='<li class="active"><a href="'.SERVERURL.'adminlist/'.$i.'/">'.$i.'</a></li>';
+                }else{
+                    $tabla.='<li><a href="'.SERVERURL.'adminlist/'.$i.'/">'.$i.'</a></li>';
+                }
+            }
+
+            if($pagina==$Npaginas){
+                $tabla.='<li class="disabled"><a><i class="zmdi zmdi-arrow-right"></i></a></li>';
+            }else{
+                $tabla.='<li><a href="'.SERVERURL.'adminlist/'.($pagina+1).'/"><i class="zmdi zmdi-arrow-right"></i></a></li>';
+            }
+            $tabla.='</ul></nav>';
+        }
 
         return $tabla;
     }
