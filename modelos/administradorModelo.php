@@ -17,4 +17,9 @@
             $sql->execute();
             return $sql;
         }
+
+        protected function eliminar_administrador_modelo(){
+            
+        }
+
     }
