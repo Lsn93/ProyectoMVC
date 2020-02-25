@@ -17,12 +17,12 @@
 	$vt = new vistasControlador();
 	$vistasR = $vt->obtener_vistas_controlador();
 	
-	if ($vistasR == "login" || $vistasR == "404") :
-		if ($vistasR == "login") {
+	if ($vistasR=="login" || $vistasR =="404") :
+		if ($vistasR =="login") {
 			require_once "./vistas/contenidos/login-view.php";
 		} else {
 			require_once "./vistas/contenidos/404-view.php";
-		} else :
+		} else:
 			session_start(['name'=>'SBP']);
 		//Comentar esto para acceder al admin:
 		require_once "./controladores/loginControlador.php";
