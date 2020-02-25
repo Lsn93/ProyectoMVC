@@ -162,7 +162,7 @@ class administradorControlador extends administradorModelo
 
         $Npaginas = ceil($total/$registros);
 
-        $tabla .= '
+        $tabla.='
             <div class="table-responsive">
             <table class="table table-hover text-center">
                 <thead>
@@ -171,11 +171,20 @@ class administradorControlador extends administradorModelo
                         <th class="text-center">DNI</th>
                         <th class="text-center">NOMBRES</th>
                         <th class="text-center">APELLIDOS</th>
-                        <th class="text-center">TELÉFONO</th>
+                        <th class="text-center">TELÉFONO</th>';
+                    if($privilegio<=2){
+                        $tabla.='
                         <th class="text-center">A. CUENTA</th>
                         <th class="text-center">A. DATOS</th>
+                        ';
+                    }
+                    if($privilegio==1){
+                        $tabla.='
                         <th class="text-center">ELIMINAR</th>
-                    </tr>
+                        ';
+                    }
+
+        $tabla.='</tr>
                 </thead>
                 <tbody>
             ';
@@ -188,34 +197,54 @@ class administradorControlador extends administradorModelo
                             <td>'.$rows['AdminDNI'].'</td>
                             <td>'.$rows['AdminNombre'].'</td>
                             <td>'.$rows['AdminApellido'].'</td>
-                            <td>'.$rows['AdminTelefono'].'</td>
-                            <td>
-                                <a href="#!" class="btn btn-success btn-raised btn-xs">
-                                    <i class="zmdi zmdi-refresh"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="#!" class="btn btn-success btn-raised btn-xs">
-                                    <i class="zmdi zmdi-refresh"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <form>
-                                    <button type="submit" class="btn btn-danger btn-raised btn-xs">
-                                        <i class="zmdi zmdi-delete"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                ';
+                            <td>'.$rows['AdminTelefono'].'</td>';
+                            if($privilegio<=2){
+                            $tabla.='
+                                <td>
+                                    <a href="'.SERVERURL.'myaccount/admin/'.mainModel::encryption($rows['CuentaCodigo']).'/" class="btn btn-success btn-raised btn-xs">
+                                        <i class="zmdi zmdi-refresh"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="'.SERVERURL.'mydata/admin/'.mainModel::encryption($rows['CuentaCodigo']).'/" class="btn btn-success btn-raised btn-xs">
+                                        <i class="zmdi zmdi-refresh"></i>
+                                    </a>
+                                </td>
+                                ';
+                            }
+                            if($privilegio==1){
+                                $tabla.='
+                                <td>
+                                    <form>
+                                        <button type="submit" class="btn btn-danger btn-raised btn-xs">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                ';
+                            }
+                    $tabla.='</tr>';
                 $contador++;
             }
         }else{
-            $tabla.='
-                <tr>
-                    <td colspan="5"> No hay registros en el sistema</td>
-                </tr>
-            ';
+            if($total>=1){
+                $tabla.='
+                    <tr>
+                        <td colspan="5">
+                            <a href="'.SERVERURL.'adminlist/" class="btn btn-sm btn-info btn-raised">
+                                Haga clic acá para recargar el listado
+                            </a>
+                        </td>
+                    </tr>
+                ';
+            }else{
+                $tabla.='
+                    <tr>
+                        <td colspan="5"> No hay registros en el sistema</td>
+                    </tr>
+                ';
+            }
+            
         }
 
         $tabla .= '</tbody></table></div>';
