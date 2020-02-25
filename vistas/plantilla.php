@@ -22,13 +22,14 @@
 			require_once "./vistas/contenidos/login-view.php";
 		} else {
 			require_once "./vistas/contenidos/404-view.php";
-		} else:
-			session_start(['name'=>'SBP']);
+		}
+	else:
+		session_start(['name'=>'SBP']);
 		//Comentar esto para acceder al admin:
 		require_once "./controladores/loginControlador.php";
 
 		$lc = new loginControlador();
-		if (!isset($_SESSION['token_sbp']) || !isset($_SESSION['usuario_sbp'])) {
+		if (!isset($_SESSION['token_sbp']) || !isset($_SESSION['usuario_sbp'])){
 			$lc->forzar_cierre_sesion_controlador();
 		}//Hasta aqui
 	?>
