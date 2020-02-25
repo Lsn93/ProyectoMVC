@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo $_SESSION['token_sbp']; ?>" title="Salir del sistema" class="btn-exit-system">
+                    <a href="<?php echo $lc->encryption($_SESSION['token_sbp']); ?>" title="Salir del sistema" class="btn-exit-system">
                         <i class="zmdi zmdi-power"></i>
                     </a>
                 </li>

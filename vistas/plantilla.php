@@ -16,7 +16,7 @@
 
 	$vt = new vistasControlador();
 	$vistasR = $vt->obtener_vistas_controlador();
-
+	
 	if ($vistasR == "login" || $vistasR == "404") :
 		if ($vistasR == "login") {
 			require_once "./vistas/contenidos/login-view.php";
@@ -24,13 +24,13 @@
 			require_once "./vistas/contenidos/404-view.php";
 		} else :
 			session_start(['name'=>'SBP']);
-
+		//Comentar esto para acceder al admin:
 		require_once "./controladores/loginControlador.php";
 
 		$lc = new loginControlador();
 		if (!isset($_SESSION['token_sbp']) || !isset($_SESSION['usuario_sbp'])) {
 			$lc->forzar_cierre_sesion_controlador();
-		}
+		}//Hasta aqui
 	?>
 		<!-- SideBar -->
 		<?php include "vistas/modulos/navlateral.php"; ?>
@@ -44,7 +44,9 @@
 			<?php require_once $vistasR; ?>
 
 		</section>
-	<?php endif; ?>
+		<?php 
+			include "vistas/modulos/logoutScript.php";
+		endif; ?>
 	<script>
 		$.material.init();
 	</script>
