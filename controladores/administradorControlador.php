@@ -6,6 +6,8 @@
     }
 
     class administradorControlador extends administradorModelo{
+
+        //Controlador para agregar administrador
         public function agregar_administrador_controlador(){
             $dni=mainModel::limpiar_cadena($_POST['dni-reg']);
             $nombre=mainModel::limpiar_cadena($_POST['nombre-reg']);
@@ -131,4 +133,34 @@
             }
             return mainModel::sweet_alert($alerta);
         }
+
+
+        //Controlador para paginar administradores
+        public function paginador_administrador_controlador($pagina,$registros,$privilegio,$codigo){
+
+            $pagina=mainModel::limpiar_cadena($pagina);
+            $registros=mainModel::limpiar_cadena($registros);
+            $privilegio=mainModel::limpiar_cadena($privilegio);
+            $codigo=mainModel::limpiar_cadena($codigo);
+            $tabla="";
+
+            $pagina= (isset($pagina) && $pagina>0) ? (int)$pagina:1;
+            $inicio= ($pagina>0) ? (($pagina*$registros-$registros)) : 0;
+
+            $conexion = mainModel::conectar();
+
+            $datos = $conexion->query("
+                SELECT SQL_CALC_FOUND_ROWS * FROM admin WHERE CuentaCodigo!='$codigo' AND id!='1' ORDER BY AdminNombre ASC LIMIT $inicio,$registros
+            ");
+            $datos= $datos->fetchAll();
+
+            $total= $conexion->query("SELECT FOUND_ROWS()");
+            $total= (int) $total->fetchColumn();
+
+            $NPaginas= ceil($total/$registros);
+
+            
+            return $tabla;
+        }
+
     }
