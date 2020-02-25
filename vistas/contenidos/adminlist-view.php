@@ -37,7 +37,7 @@
         <div class="panel-body">
             <?php 
                 $pagina = explode("/", $_GET['views']);
-                echo $insAdmin->paginador_administrador_controlador($pagina[1],10,$_SESSION['privilegio_sbp'],$_SESSION['codigo_cuenta_sbp']);
+                echo $insAdmin->paginador_administrador_controlador($pagina[1],10,$_SESSION['privilegio_sbp'],$_SESSION['codigo_cuenta_sbp'],"");
             ?>
         </div>
     </div>
