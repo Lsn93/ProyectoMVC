@@ -160,7 +160,7 @@ class administradorControlador extends administradorModelo
         $total = $conexion->query("SELECT FOUND_ROWS()");
         $total = (int) $total->fetchColumn();
 
-        $NPaginas = ceil($total / $registros);
+        $Npaginas = ceil($total/$registros);
 
         $tabla .= '
             <div class="table-responsive">
@@ -179,7 +179,7 @@ class administradorControlador extends administradorModelo
                 </thead>
                 <tbody>
             ';
-        if($total>=1 && $pagina<=$Npaginas){
+            if($total>=1 && $pagina<=$Npaginas){
             $contador=$inicio+1;
             foreach($datos as $rows){
                 $tabla.='
