@@ -366,7 +366,57 @@ class administradorControlador extends administradorModelo
 
 
     public function actualizar_administrador_controlador(){
-            
+            $cuenta=mainModel::decryption($_POST['cuenta-up']);
+
+            $dni=mainModel::limpiar_cadena($_POST['dni-up']);
+            $nombre=mainModel::limpiar_cadena($_POST['nombre-up']);
+            $apellido=mainModel::limpiar_cadena($_POST['apellido-up']);
+            $telefono=mainModel::limpiar_cadena($_POST['telefono-up']);
+            $direccion=mainModel::limpiar_cadena($_POST['direccion-up']);
+
+            $query1=mainModel::ejecutar_consulta_simple("SELECT * FROM admin WHERE CuentaCodigo='$cuenta'");
+            $DatosAdmin=$query1->fetch();
+
+            if($dni!=$DatosAdmin['AdminDNI']){
+                $consulta1=mainModel::ejecutar_consulta_simple("SELECT AdminDNI FROM admin WHERE AdminDNI='$dni'");
+                if($consulta1->rowCount()>=1){
+                    $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto" => "El DNI que acaba de ingresar ya se encuentra registrado en el sistema",
+                        "Tipo" => "error"
+                    ];
+                    return mainModel::sweet_alert($alerta);
+                    exit();
+                }
+            }
+
+            $dataAd=[
+                "DNI"=>$dni,
+                "Nombre"=>$nombre,
+                "Apellido"=>$apellido,
+                "Telefono"=>$telefono,
+                "Direccion"=>$direccion,
+                "Codigo"=>$cuenta
+            ];
+
+            if(administradorModelo::actualizar_administrador_modelo($dataAd)){
+                $alerta = [
+                    "Alerta" => "recargar",
+                    "Titulo" => "¡Datos actualizados!",
+                    "Texto" => "Tus datos han sido actualizados con éxito",
+                    "Tipo" => "success"
+                ];
+            }else{
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto" => "No hemos podido actualizar tus datos, por favor intente nuevamente",
+                    "Tipo" => "error"
+                ];
+            }
+            return mainModel::sweet_alert($alerta);
+
     }
 
 }
