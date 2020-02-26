@@ -1,3 +1,4 @@
+<!-- Content Page -->
 <div class="container-fluid">
     <div class="page-header">
         <h1 class="text-titles"><i class="zmdi zmdi-settings zmdi-hc-fw"></i> MI CUENTA</small></h1>
@@ -5,14 +6,25 @@
     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p>
 </div>
 
-<!-- Panel mi cuenta -->
+<?php
+    $datos=explode("/",$_GET['views']);
+    
+    if(isset($datos[1]) && ($datos[1]=="admin" || $datos[1]=="user")):
+
+    require_once "./controladores/cuentaControlador.php";
+    $classCuenta = new cuentaControlador();
+
+    $filesC=$classCuenta->datos_cuenta_controlador($datos[2]);
+
+    if($filesC->rowCount()==1){
+?>
 <div class="container-fluid">
     <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title"><i class="zmdi zmdi-refresh"></i> &nbsp; MI CUENTA</h3>
         </div>
         <div class="panel-body">
-            <form>
+            <form action="<?php echo SERVERURL; ?>ajax/cuentaAjax.php" method="POST" data-form="update" class="FormularioAjax" autocomplete="off" enctype="multipart/form-data">
                 <fieldset>
                     <legend><i class="zmdi zmdi-key"></i> &nbsp; Datos de la cuenta</legend>
                     <div class="container-fluid">
@@ -120,7 +132,17 @@
                 <p class="text-center" style="margin-top: 20px;">
                     <button type="submit" class="btn btn-success btn-raised btn-sm"><i class="zmdi zmdi-refresh"></i> Actualizar</button>
                 </p>
+                <div class="RespuestaAjax"></div>
             </form>
         </div>
     </div>
 </div>
+
+<?php }else{ ?>
+<p>Error de cuenta</p>
+<?php
+    }
+    else:
+?>
+<p>Error de parametros</p>
+<?php endif; ?>
