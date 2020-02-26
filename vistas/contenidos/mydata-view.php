@@ -7,7 +7,26 @@
 
 <!-- Panel mis datos -->
 <div class="container-fluid">
-    <div class="panel panel-success">
+    <?php
+        $datos=explode("/", $_GET['views']);
+        
+        //ADMINISTRADOR
+        if($datos[1]=="admin"):
+            if($_SESSION['tipo_sbp']!="Administrador"){
+                echo $lc->forzar_cierre_sesion_controlador();
+            }
+            
+
+        //USUARIO
+        elseif($datos[1]=="user"):
+            echo "usuario";        
+        //ERROR
+        else:
+    ?>
+    <h4>Lo sentimos</h4>
+    <p>No podemos mostrar la información solicitada</p>
+    <?php endif; ?>
+    <!--<div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title"><i class="zmdi zmdi-refresh"></i> &nbsp; MIS DATOS</h3>
         </div>
@@ -55,5 +74,5 @@
                 </p>
             </form>
         </div>
-    </div>
+    </div>-->
 </div>
