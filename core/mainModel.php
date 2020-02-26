@@ -39,6 +39,13 @@
             return $sql;
         }
 
+        protected function datos_cuenta($codigo){
+            $query=self::conectar()->prepare("SELECT * FROM cuenta WHERE CuentaCodigo=:Codigo");
+            $query->bindParam(":Codigo",$codigo);
+            $query->execute();
+            return $query;
+        }
+
         protected function guardar_bitacora($datos){
             $sql=self::conectar()->prepare("INSERT INTO bitacora(BitacoraCodigo,BitacoraFecha,BitacoraHoraInicio,BitacoraHoraFinal,BitacoraTipo,BitacoraYear,CuentaCodigo) VALUES(:Codigo,:Fecha,:HoraInicio,:HoraFinal,:Tipo,:Year,:Cuenta)");
             $sql->bindParam(":Codigo",$datos['Codigo']);
