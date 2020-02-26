@@ -37,4 +37,9 @@
             return $query;
         }
 
+
+        protected function actualizar_administrador_modelo($datos){
+            
+        }
+
     }

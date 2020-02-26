@@ -364,4 +364,9 @@ class administradorControlador extends administradorModelo
         return administradorModelo::datos_administrador_modelo($tipo,$codigo);
     }
 
+
+    public function actualizar_administrador_controlador(){
+            
+    }
+
 }

@@ -11,7 +11,7 @@
         $datos=explode("/", $_GET['views']);
         
         //ADMINISTRADOR
-        if($datos[1]=="admin"):
+        if($datos[1]=="admin"){
             if($_SESSION['tipo_sbp']!="Administrador"){
                 echo $lc->forzar_cierre_sesion_controlador();
             }
@@ -88,12 +88,16 @@
             }
 
         //USUARIO
-        elseif($datos[1]=="user"):
+        }elseif($datos[1]=="user"){
             echo "usuario";        
         //ERROR
-        else:
+        }else{
     ?>
-    <h4>Lo sentimos</h4>
-    <p>No podemos mostrar la información solicitada</p>
-    <?php endif; ?>
+    <div class="alert alert-dismissible alert-warning text-center">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <i class="zmdi zmdi-alert-triangle zmdi-hc-5x"></i>
+        <h4>Lo sentimos</h4>
+        <p>No podemos mostrar la información solicitada</p>
+    </div>
+    <?php } ?>
 </div>
