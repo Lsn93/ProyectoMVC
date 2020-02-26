@@ -39,7 +39,15 @@
 
 
         protected function actualizar_administrador_modelo($datos){
-            
+            $query=mainModel::conectar()->prepare("UPDATE admin SET AdminDNI=:DNI,AdminNombre=:Nombre,AdminApellido=:Apellido,AdminTelefono=:Telefono,AdminDireccion=:Direccion WHERE CuentaCodigo=:Codigo");
+            $query->bindParam(":DNI",$datos['DNI']);
+            $query->bindParam(":Nombre",$datos['Nombre']);
+            $query->bindParam(":Apellido",$datos['Apellido']);
+            $query->bindParam(":Telefono",$datos['Telefono']);
+            $query->bindParam(":Direccion",$datos['Direccion']);
+            $query->bindParam(":Codigo",$datos['Codigo']);
+            $query->execute();
+            return $query;
         }
 
     }
