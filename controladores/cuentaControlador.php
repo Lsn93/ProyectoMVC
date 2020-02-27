@@ -85,6 +85,37 @@
             }
 
 
+            $CuentaGenero=mainModel::limpiar_cadena($_POST['optionsGenero-up']);
+            if(isset($_POST['optionsEstado-up'])){
+                $CuentaEstado=mainModel::limpiar_cadena($_POST['optionsEstado-up']);
+            }else{
+                $CuentaEstado=$DatosCuenta['CuentaEstado'];
+            }
+
+            if($CuentaTipo=="admin"){
+                if(isset($_POST['optionsPrivilegio-up'])){
+                    $CuentaPrivilegio=mainModel::decryption($_POST['optionsPrivilegio-up']);
+                }else{
+                    $CuentaPrivilegio=$DatosCuenta['CuentaPrivilegio'];
+                }
+
+                if($CuentaGenero=="Masculino"){
+                    $CuentaFoto="Male3Avatar.png";
+                }else{
+                    $CuentaFoto="Female3Avatar.png";
+                }
+            }else{
+                $CuentaPrivilegio=$DatosCuenta['CuentaPrivilegio'];
+                if($CuentaGenero=="Masculino"){
+                    $CuentaFoto="Male2Avatar.png";
+                }else{
+                    $CuentaFoto="Female2Avatar.png";
+                }
+            }
+
+
+
+
         }
 
     }
