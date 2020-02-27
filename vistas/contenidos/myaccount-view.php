@@ -49,7 +49,7 @@
 		    				<div class="col-xs-12 col-sm-6">
 								<div class="form-group label-floating">
 								  	<label class="control-label">E-mail</label>
-								  	<input class="form-control" type="email" name="email-up" maxlength="50">
+								  	<input class="form-control" type="email" name="email-up" value="<?php echo$campos['CuentaEmail']; ?>" maxlength="50">
 								</div>
 		    				</div>
 		    				<div class="col-xs-12 col-sm-6">
@@ -57,35 +57,37 @@
 									<label class="control-label">Genero</label>
 									<div class="radio radio-primary">
 										<label>
-											<input type="radio" name="optionsGenero-up" value="Masculino" >
+											<input type="radio" name="optionsGenero-up" <?php if($campos['CuentaGenero']=="Masculino"){ echo 'checked=""'; } ?> value="Masculino" >
 											<i class="zmdi zmdi-male-alt"></i> &nbsp; Masculino
 										</label>
 									</div>
 									<div class="radio radio-primary">
 										<label>
-											<input type="radio" name="optionsGenero-up" value="Femenino" >
+											<input type="radio" name="optionsGenero-up" <?php if($campos['CuentaGenero']=="Femenino"){ echo 'checked=""'; } ?> value="Femenino" >
 											<i class="zmdi zmdi-female"></i> &nbsp; Femenino
 										</label>
 									</div>
 								</div>
-		    				</div>
+                            </div>
+                            <?php if($_SESSION['tipo_sbp']=="Administrador" && $_SESSION['privilegio_sbp']==1 && $campos['id']!=1):?>
 							<div class="col-xs-12 col-sm-6">
 								<div class="form-group">
 									<label class="control-label">Estado de la cuenta</label>
 									<div class="radio radio-primary">
 										<label>
-											<input type="radio" name="optionsEstado-up" value="Activo" >
+											<input type="radio" name="optionsEstado-up" <?php if($campos['CuentaEstado']=="Activo"){ echo 'checked=""'; } ?> value="Activo" >
 											<i class="zmdi zmdi-lock-open"></i> &nbsp; Activo
 										</label>
 									</div>
 									<div class="radio radio-primary">
 										<label>
-											<input type="radio" name="optionsEstado-up" value="Deshabilitado"  >
+											<input type="radio" name="optionsEstado-up" <?php if($campos['CuentaEstado']=="Deshabilitado"){ echo 'checked=""'; } ?> value="Deshabilitado"  >
 											<i class="zmdi zmdi-lock"></i> &nbsp; Deshabilitado
 										</label>
 									</div>
 								</div>
-		    				</div>
+                            </div>
+                            <?php endif;?>
 		    			</div>
 		    		</div>
 		    	</fieldset>
@@ -112,7 +114,8 @@
 		    			</div>
 		    		</div>
 		    	</fieldset>
-		    	<br>
+                <br>
+                <?php if($_SESSION['tipo_sbp']=="Administrador" && $_SESSION['privilegio_sbp']==1 && $campos['id']!=1):?>
 		    	<fieldset>
 		    		<legend><i class="zmdi zmdi-star"></i> &nbsp; Nivel de privilegios</legend>
 		    		<div class="container-fluid">
@@ -131,19 +134,19 @@
 		    				<div class="col-xs-12 col-sm-6">
 								<div class="radio radio-primary">
 									<label>
-										<input type="radio" name="optionsPrivilegio-up" >
+										<input type="radio" name="optionsPrivilegio-up" value="<?php  echo $lc->encryption(1); ?>" <?php if($campos['CuentaPrivilegio']==1){ echo 'checked=""'; } ?> >
 										<i class="zmdi zmdi-star"></i> &nbsp; Nivel 1
 									</label>
 								</div>
 								<div class="radio radio-primary">
 									<label>
-										<input type="radio" name="optionsPrivilegio-up" >
+										<input type="radio" name="optionsPrivilegio-up" value="<?php  echo $lc->encryption(2); ?>" <?php if($campos['CuentaPrivilegio']==2){ echo 'checked=""'; } ?>>
 										<i class="zmdi zmdi-star"></i> &nbsp; Nivel 2
 									</label>
 								</div>
 								<div class="radio radio-primary">
 									<label>
-										<input type="radio" name="optionsPrivilegio-up" >
+										<input type="radio" name="optionsPrivilegio-up" value="<?php  echo $lc->encryption(3); ?>" <?php if($campos['CuentaPrivilegio']==3){ echo 'checked=""'; } ?>>
 										<i class="zmdi zmdi-star"></i> &nbsp; Nivel 3
 									</label>
 								</div>
@@ -151,7 +154,8 @@
 		    			</div>
 		    		</div>
 		    	</fieldset>
-				<br>
+                <br>
+                <?php endif;?>
 				<fieldset>
 		    		<legend><i class="zmdi zmdi-account-circle"></i> &nbsp; Datos de la cuenta</legend>
 		    		<p>
