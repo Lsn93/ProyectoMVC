@@ -51,7 +51,38 @@
                 return mainModel::sweet_alert($alerta);
                 exit();
             }
-            
+
+            //VERIFICAR USUARIO
+            $CuentaUsuario=mainModel::limpiar_cadena($_POST['usuario-up']);
+            if($CuentaUsuario!=$DatosCuenta['CuentaUsuario']){
+                $query2=mainModel::ejecutar_consulta_simple("SELECT CuentaUsuario FROM cuenta WHERE CuentaUsuario='$CuentaUsuario'");
+                if($query2->rowCount()>=1){
+                    $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto" => "El nombre de usuario que acaba de ingresar ya se encuentra registrado en el sistema",
+                        "Tipo" => "error"
+                    ];
+                    return mainModel::sweet_alert($alerta);
+                    exit();
+                }
+            }
+
+            //VERIFICAR EMAIL
+            $CuentaEmail=mainModel::limpiar_cadena($_POST['email-up']);
+            if($CuentaEmail!=$DatosCuenta['CuentaEmail']){
+                $query3=mainModel::ejecutar_consulta_simple("SELECT CuentaEmail FROM cuenta WHERE CuentaEmail='$CuentaEmail'");
+                if($query3->rowCount()>=1){
+                    $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto" => "El nombre de usuario que acaba de ingresar ya se encuentra registrado en el sistema",
+                        "Tipo" => "error"
+                    ];
+                    return mainModel::sweet_alert($alerta);
+                    exit();
+                }
+            }
 
 
         }
