@@ -13,4 +13,8 @@
             return mainModel::datos_cuenta($codigo);
         }
 
+        public function actualizar_cuenta_controlador(){
+            
+        }
+
     }
