@@ -125,8 +125,18 @@
         }
 
         public function forzar_cierre_sesion_controlador(){
-            session_start(['name'=>'SBP']);
+            session_unset();
             session_destroy();
-            return header("Location: ".SERVERURL."login/");
+            $redirect='<script> window.location.href="'.SERVERURL.'login/" </script>';
+            return $redirect;
+        }
+
+        public function redireccionar_usuario_controlador($tipo){
+            if($tipo=="Administrador"){
+                $redirect='<script> window.location.href="'.SERVERURL.'home/" </script>';
+            }else{
+                $redirect='<script> window.location.href="'.SERVERURL.'catalog/" </script>';
+            }
+            return $redirect;
         }
     }

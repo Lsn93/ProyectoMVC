@@ -38,6 +38,7 @@
         </div>
         <!-- SideBar Menu -->
         <ul class="list-unstyled full-box dashboard-sideBar-Menu">
+            <?php if($_SESSION['tipo_sbp']="Administrador"): ?>
             <li>
                 <a href="<?php echo SERVERURL; ?>home/">
                     <i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
@@ -75,6 +76,7 @@
                     </li>
                 </ul>
             </li>
+            <?php endif; ?>
             <li>
                 <a href="<?php echo SERVERURL; ?>catalog/">
                     <i class="zmdi zmdi-book-image zmdi-hc-fw"></i> Catalogo

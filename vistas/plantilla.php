@@ -30,11 +30,11 @@
 
 		$lc = new loginControlador();
 		if (!isset($_SESSION['token_sbp']) || !isset($_SESSION['usuario_sbp'])){
-			$lc->forzar_cierre_sesion_controlador();
+			echo $lc->forzar_cierre_sesion_controlador();
 		}//Hasta aqui
 	?>
 		<!-- SideBar -->
-		<?php include "vistas/modulos/navlateral.php"; ?>
+		<?php include "./vistas/modulos/navlateral.php"; ?>
 
 		<!-- Content page-->
 		<section class="full-box dashboard-contentPage">
