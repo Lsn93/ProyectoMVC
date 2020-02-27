@@ -14,7 +14,7 @@
 		require_once "./controladores/cuentaControlador.php";
 		$classCuenta = new cuentaControlador();
 
-		$filesC=$classCuenta->datos_cuenta_controlador($datos[2]);
+		$filesC=$classCuenta->datos_cuenta_controlador($datos[2],$datos[1]);
 
 		if($filesC->rowCount()==1){
 ?>
@@ -115,7 +115,7 @@
 		    		</div>
 		    	</fieldset>
                 <br>
-                <?php if($_SESSION['tipo_sbp']=="Administrador" && $_SESSION['privilegio_sbp']==1 && $campos['id']!=1):?>
+                <?php if($_SESSION['tipo_sbp']=="Administrador" && $_SESSION['privilegio_sbp']==1 && $campos['id']!=1 && $campos['CuentaTipo']=="Administrador" && $datos[1]=="admin"):?>
 		    	<fieldset>
 		    		<legend><i class="zmdi zmdi-star"></i> &nbsp; Nivel de privilegios</legend>
 		    		<div class="container-fluid">

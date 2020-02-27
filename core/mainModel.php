@@ -33,13 +33,14 @@
         }
 
         protected function eliminar_cuenta($codigo){
-            $sql=self::conectar()->prepare("DELETE FROM cuenta WHERE CuentaCodigo=:Codigo");
+            $sql=self::conectar()->prepare("DELETE FROM cuenta WHERE CuentaCodigo=:Codigo AND CuentaTipo=:Tipo");
             $sql->bindParam(":Codigo",$codigo);
+            $sql->bindParam(":Tipo",$tipo);
             $sql->execute();
             return $sql;
         }
 
-        protected function datos_cuenta($codigo){
+        protected function datos_cuenta($codigo,$tipo){
             $query=self::conectar()->prepare("SELECT * FROM cuenta WHERE CuentaCodigo=:Codigo");
             $query->bindParam(":Codigo",$codigo);
             $query->execute();

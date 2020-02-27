@@ -7,10 +7,17 @@
 
     class cuentaControlador extends mainModel{
 
-        public function datos_cuenta_controlador($codigo){
+        public function datos_cuenta_controlador($codigo,$tipo){
             $codigo=mainModel::decryption($codigo);
+            $tipo=mainModel::limpiar_cadena($tipo);
+
+            if($tipo=="admin"){
+                $tipo="Administrador";
+            }else{
+                $tipo="Cliente";
+            }
             
-            return mainModel::datos_cuenta($codigo);
+            return mainModel::datos_cuenta($codigo,$tipo);
         }
 
         public function actualizar_cuenta_controlador(){

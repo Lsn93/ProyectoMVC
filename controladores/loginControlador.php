@@ -46,23 +46,49 @@
                 $insertarBitacora=mainModel::guardar_bitacora($datosBitacora);
 
                 if($insertarBitacora->rowCount()>=1){
-                    session_start(['name'=>'SBP']);
-                    $_SESSION['usuario_sbp']=$row['CuentaUsuario'];
-                    $_SESSION['tipo_sbp']=$row['CuentaTipo'];
-                    $_SESSION['privilegio_sbp']=$row['CuentaPrivilegio'];
-                    $_SESSION['foto_sbp']=$row['CuentaFoto'];
-                    $_SESSION['token_sbp']=md5(uniqid(mt_rand(),true));
-                    $_SESSION['codigo_cuenta_sbp']=$row['CuentaCodigo'];
-                    $_SESSION['codigo_bitacora_sbp']=$codigoB;
-
-                    if($row['CuentaTipo']=="Administrador"){
-                        $url=SERVERURL."home/";
-                    }else{
-                        $url=SERVERURL."catalog/";
-                    }
                     
-                    return $urlLocation='<script> window.location="'.$url.'" </script>';
+                    if($row['CuentaTipo']=="Administrador"){
+                        $query1=mainModel::ejecutar_consulta_simple("SELECT * FROM admin WHERE CuentaCodigo='".$row['CuentaCodigo']."'");
+                    }else{
+                        $query1=mainModel::ejecutar_consulta_simple("SELECT * FROM cliente WHERE CuentaCodigo='".$row['CuentaCodigo']."'");
+                    }
 
+                    if($query1->rowCount()==1){
+                        session_start(['name'=>'SBP']);
+                        $UserData=$query1->fetch();
+
+                        if($row['CuentaTipo']=="Administrador"){
+                            $_SESSION['nombre_sbp']=$UserData['AdminNombre'];
+                            $_SESSION['apellido_sbp']=$UserData['AdminApellido'];
+                        }else{
+                            $_SESSION['nombre_sbp']=$UserData['ClienteNombre'];
+                            $_SESSION['apellido_sbp']=$UserData['ClienteApellido'];
+                        }
+
+                        $_SESSION['usuario_sbp']=$row['CuentaUsuario'];
+                        $_SESSION['tipo_sbp']=$row['CuentaTipo'];
+                        $_SESSION['privilegio_sbp']=$row['CuentaPrivilegio'];
+                        $_SESSION['foto_sbp']=$row['CuentaFoto'];
+                        $_SESSION['token_sbp']=md5(uniqid(mt_rand(),true));
+                        $_SESSION['codigo_cuenta_sbp']=$row['CuentaCodigo'];
+                        $_SESSION['codigo_bitacora_sbp']=$codigoB;
+    
+                        if($row['CuentaTipo']=="Administrador"){
+                            $url=SERVERURL."home/";
+                        }else{
+                            $url=SERVERURL."catalog/";
+                        }
+                        
+                        return $urlLocation='<script> window.location="'.$url.'" </script>';
+                    }else{
+                        $alerta=[
+                            "Alerta"=>"simple",
+                            "Titulo"=>"Ocurrió un error inesperado",
+                            "Texto"=>"No hemos podido iniciar la sesión por problemas técnicos, por favor intente nuevamente",
+                            "Tipo"=>"error"
+                        ];
+                        return mainModel::sweet_alert($alerta);
+                    }      
                 }else{
                     $alerta=[
                         "Alerta"=>"simple",
