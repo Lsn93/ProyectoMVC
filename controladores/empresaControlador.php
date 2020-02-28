@@ -71,4 +71,12 @@
             }
             return mainModel::sweet_alert($alerta);
         }
+
+
+        public function datos_empresa_controlador($tipo,$codigo){
+            $codigo=mainModel::decryption($codigo);
+            $tipo=mainModel::limpiar_cadena($tipo);
+
+            return empresaModelo::datos_empresa_modelo($tipo,$codigo);
+        }
     }

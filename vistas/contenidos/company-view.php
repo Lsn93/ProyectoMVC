@@ -21,6 +21,15 @@
     </ul>
 </div>
 
+<?php
+    require_once "./controladores/empresaControlador.php";
+
+    $iEm= new empresaControlador();
+
+    $cEm=$iEm->datos_empresa_controlador("Conteo",0);
+
+    if($cEm->rowCount()<=0){
+?>
 <!-- panel datos de la empresa -->
 <div class="container-fluid">
     <div class="panel panel-info">
@@ -101,3 +110,11 @@
         </div>
     </div>
 </div>
+<?php }else{?>
+    <div class="alert alert-dismissible alert-primary text-center">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <i class="zmdi zmdi-alert-octagon zmdi-hc-5x"></i>
+        <h4>¡Lo sentimos!</h4>
+        <p>Ya existe una empresa registrada por lo tanto ya no puede agregar más</p>
+    </div>
+<?php }?>
