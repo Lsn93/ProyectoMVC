@@ -6,5 +6,7 @@
     }
 
     class clienteControlador extends clienteModelo{
+        public function agregar_cliente_controlador(){
 
+        }
     }

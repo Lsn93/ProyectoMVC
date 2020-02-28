@@ -32,7 +32,7 @@
             <h3 class="panel-title"><i class="zmdi zmdi-plus"></i> &nbsp; NUEVO CLIENTE</h3>
         </div>
         <div class="panel-body">
-            <form>
+            <form action="<?php echo SERVERURL; ?>ajax/clienteAjax.php" method="POST" data-form="save" class="FormularioAjax" autocomplete="off" enctype="multipart/form-data">
                 <fieldset>
                     <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Información personal</legend>
                     <div class="container-fluid">
@@ -128,6 +128,7 @@
                 <p class="text-center" style="margin-top: 20px;">
                     <button type="submit" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Guardar</button>
                 </p>
+                <div class="RespuestaAjax"></div>
             </form>
         </div>
     </div>
