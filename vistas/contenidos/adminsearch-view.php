@@ -29,22 +29,11 @@
         </li>
     </ul>
 </div>
-<?php 
-    require_once "./controladores/administradorControlador.php";
-    $insAdmin= new administradorControlador();
-
-    if(isset($_POST['busqueda_inicial_admin'])){
-        $_SESSION['busqueda_admin']=$_POST['busqueda_inicial_admin'];
-    }
-
-    if(isset($_POST['eliminar_busqueda_admin'])){
-        unset($_SESSION['busqueda_admin']);
-    }
-
+<?php
     if(!isset($_SESSION['busqueda_admin']) && empty($_SESSION['busqueda_admin'])):
 ?>
 <div class="container-fluid">
-    <form class="well" method="POST" action="" autocomplete="off">
+    <form class="well FormularioAjax" action="<?php echo SERVERURL; ?>ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off" enctype="multipart/form-data">
         <div class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2">
                 <div class="form-group label-floating">
@@ -58,11 +47,12 @@
                 </p>
             </div>
         </div>
+        <div class="RespuestaAjax"></div>
     </form>
 </div>
     <?php else: ?>
 <div class="container-fluid">
-    <form class="well" method="POST" action="">
+    <form lass="well FormularioAjax" action="<?php echo SERVERURL; ?>ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off" enctype="multipart/form-data">
         <p class="lead text-center">Su última búsqueda fue <strong>“<?php  echo $_SESSION['busqueda_admin']; ?>”</strong></p>
         <div class="row">
             <input class="form-control" type="hidden" name="eliminar_busqueda_admin" value="1">
@@ -72,6 +62,7 @@
                 </p>
             </div>
         </div>
+        <div class="RespuestaAjax"></div>
     </form>
 </div>
 
@@ -82,7 +73,11 @@
             <h3 class="panel-title"><i class="zmdi zmdi-search"></i> &nbsp; BUSCAR ADMINISTRADOR</h3>
         </div>
         <div class="panel-body">
-            <?php 
+            <?php
+
+                require_once "./controladores/administradorControlador.php";
+                $insAdmin= new administradorControlador();
+                
                 $pagina = explode("/", $_GET['views']);
                 echo $insAdmin->paginador_administrador_controlador($pagina[1],10,$_SESSION['privilegio_sbp'],$_SESSION['codigo_cuenta_sbp'],$_SESSION['busqueda_admin']);
             ?>
