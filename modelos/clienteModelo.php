@@ -18,4 +18,8 @@
             $sql->execute();
             return $sql;
         }
+
+        protected function eliminar_cliente_modelo($codigo){
+            
+        }
     }
