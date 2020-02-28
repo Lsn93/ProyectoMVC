@@ -6,5 +6,16 @@
     }
 
     class clienteModelo extends mainModel{
-
+        protected function agregar_cliente_modelo($datos){
+            $sql=mainModel::conectar()->prepare("INSERT INTO cliente (ClienteDNI,ClienteNombre,ClienteApellido,ClienteTelefono,ClienteOcupacion,ClienteDireccion,CuentaCodigo) VALUES(:DNI,:Nombre,:Apellido,:Telefono,:Ocupacion,:Direccion,:Codigo)");
+            $sql->bindParam(":DNI",$datos['DNI']);
+            $sql->bindParam(":Nombre",$datos['Nombre']);
+            $sql->bindParam(":Apellido",$datos['Apellido']);
+            $sql->bindParam(":Telefono",$datos['Telefono']);
+            $sql->bindParam(":Ocupacion",$datos['Ocupacion']);
+            $sql->bindParam(":Direccion",$datos['Direccion']);
+            $sql->bindParam(":Codigo",$datos['Codigo']);
+            $sql->execute();
+            return $sql;
+        }
     }
