@@ -285,6 +285,15 @@
             return $tabla;
         }
 
+
+        public function datos_cliente_controlador($tipo,$codigo){
+            $codigo=mainModel::decryption($codigo);
+            $tipo=mainModel::limpiar_cadena($tipo);
+    
+            return clienteModelo::datos_cliente_modelo($tipo,$codigo);
+        }
+
+
         public function eliminar_cliente_controlador(){
             $codigo=mainModel::decryption($_POST['codigo-del']);
             $privilegio=mainModel::decryption($_POST['privilegio-admin']);

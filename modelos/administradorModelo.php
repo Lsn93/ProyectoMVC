@@ -6,6 +6,7 @@
     }
 
     class administradorModelo extends mainModel{
+
         protected function agregar_administrador_modelo($datos){
             $sql=mainModel::conectar()->prepare("INSERT INTO admin(AdminDNI,AdminNombre,AdminApellido,AdminTelefono,AdminDireccion,CuentaCodigo) VALUES(:DNI,:Nombre,:Apellido,:Telefono,:Direccion,:Codigo)");
             $sql->bindParam(":DNI",$datos['DNI']);
@@ -18,6 +19,7 @@
             return $sql;
         }
 
+        
         protected function eliminar_administrador_modelo($codigo){
             $query=mainModel::conectar()->prepare("DELETE FROM admin WHERE CuentaCodigo=:Codigo");
             $query->bindParam(":Codigo",$codigo);

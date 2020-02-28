@@ -26,18 +26,25 @@
             <small>Registrados</small>
         </div>
     </article>
+
+    <?php
+        require "./controladores/clienteControlador.php";
+        $ICliente= new clienteControlador();
+        $CClientes= $ICliente->datos_cliente_controlador("Conteo",0);
+    ?>
     <article class="full-box tile">
         <div class="full-box tile-title text-center text-titles text-uppercase">
-            Teacher
+            Clientes
         </div>
         <div class="full-box tile-icon text-center">
             <i class="zmdi zmdi-male-alt"></i>
         </div>
         <div class="full-box tile-number text-titles">
-            <p class="full-box">10</p>
+            <p class="full-box"><?php echo $CClientes->rowCount(); ?></p>
             <small>Register</small>
         </div>
     </article>
+
     <article class="full-box tile">
         <div class="full-box tile-title text-center text-titles text-uppercase">
             Student

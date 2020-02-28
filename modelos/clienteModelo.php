@@ -6,6 +6,7 @@
     }
 
     class clienteModelo extends mainModel{
+        
         protected function agregar_cliente_modelo($datos){
             $sql=mainModel::conectar()->prepare("INSERT INTO cliente (ClienteDNI,ClienteNombre,ClienteApellido,ClienteTelefono,ClienteOcupacion,ClienteDireccion,CuentaCodigo) VALUES(:DNI,:Nombre,:Apellido,:Telefono,:Ocupacion,:Direccion,:Codigo)");
             $sql->bindParam(":DNI",$datos['DNI']);
@@ -17,6 +18,18 @@
             $sql->bindParam(":Codigo",$datos['Codigo']);
             $sql->execute();
             return $sql;
+        }
+
+        
+        protected function datos_cliente_modelo($tipo,$codigo){
+            if($tipo=="Unico"){
+                $query=mainModel::conectar()->prepare("SELECT * FROM cliente WHERE CuentaCodigo=:Codigo");
+                $query->bindParam(":Codigo",$codigo);
+            }elseif($tipo=="Conteo"){
+                $query=mainModel::conectar()->prepare("SELECT id FROM cliente");
+            }
+            $query->execute();
+            return $query;
         }
 
         protected function eliminar_cliente_modelo($codigo){
