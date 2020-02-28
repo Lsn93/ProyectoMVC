@@ -38,4 +38,19 @@
             $query->execute();
             return $query;
         }
+
+
+        protected function actualizar_cliente_modelo($datos){
+            $query=mainModel::conectar()->prepare("UPDATE cliente SET ClienteDNI=:DNI,ClienteNombre=:Nombre,ClienteApellido=:Apellido,ClienteTelefono=:Telefono,ClienteOcupacion=:Ocupacion,ClienteDireccion=:Direccion WHERE CuentaCodigo=:Codigo");
+            $query->bindParam(":DNI",$datos['DNI']);
+            $query->bindParam(":Nombre",$datos['Nombre']);
+            $query->bindParam(":Apellido",$datos['Apellido']);
+            $query->bindParam(":Telefono",$datos['Telefono']);
+            $query->bindParam(":Ocupacion",$datos['Ocupacion']);
+            $query->bindParam(":Direccion",$datos['Direccion']);
+            $query->bindParam(":Codigo",$datos['Codigo']);
+            $query->execute();
+            return $query;
+        }
+
     }

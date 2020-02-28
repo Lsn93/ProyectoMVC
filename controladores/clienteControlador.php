@@ -342,4 +342,9 @@
             return mainModel::sweet_alert($alerta);
         }
 
+
+        public function actualizar_cliente_controlador(){
+            
+        }
+
 }
