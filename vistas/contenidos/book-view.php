@@ -1,3 +1,8 @@
+<?php
+    if($_SESSION['tipo_sbp']!="Administrador"){
+        echo $lc->forzar_cierre_sesion_controlador();
+    }
+?>
 <div class="container-fluid">
     <div class="page-header">
         <h1 class="text-titles"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Administración <small>NUEVO LIBRO</small></h1>
@@ -70,9 +75,17 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Empresa</label>
-                                    <select name="categoria-reg" class="form-control">
-                                        <option value="empresa1">Empresa 1</option>
-                                        <option value="empresa2">Empresa 2</option>
+                                    <select name="empresa-reg" class="form-control">
+                                        <?php
+                                            require_once "./controladores/empresaControlador.php";
+                                            $insEm= new empresaControlador();
+
+                                            $dataE=$insEm->datos_empresa_controlador("Select",0);
+
+                                            while($rowE=$dataE->fetch()){
+                                                echo '<option value="'.$lc->encryption($rowE['EmpresaCodigo']).'">'.$rowE['EmpresaNombre'].'</option>';
+                                            }
+                                        ?>
                                     </select>
                                 </div>
                             </div>

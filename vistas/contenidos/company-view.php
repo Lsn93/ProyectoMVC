@@ -1,3 +1,8 @@
+<?php
+    if($_SESSION['tipo_sbp']!="Administrador"){
+        echo $lc->forzar_cierre_sesion_controlador();
+    }
+?>
 <!-- Content Page -->
 <div class="container-fluid">
     <div class="page-header">
