@@ -69,7 +69,65 @@
                                 "Tipo" => "error"
                             ];
                         }else{
+                            $consulta4 = mainModel::ejecutar_consulta_simple("SELECT id FROM cuenta");
+                            $numero = ($consulta4->rowCount()) + 1;
                             
+                            $codigo = mainModel::generar_codigo_aleatorio("CC", 7, $numero);
+
+                            $clave=mainModel::encryption($password1);
+
+                            $dataAC=[
+                                "Codigo"=>$codigo,
+                                "Privilegio"=>$privilegio,
+                                "Usuario"=>$usuario,
+                                "Clave"=>$clave,
+                                "Email"=>$email,
+                                "Estado"=>"Activo",
+                                "Tipo"=>"Cliente",
+                                "Genero"=>$genero,
+                                "Foto"=>$foto
+                            ];
+
+                            $guardarCuenta=mainModel::agregar_cuenta($dataAC);
+
+                            if($guardarCuenta->rowCount()>=1){
+                                
+                                $dataCli=[
+                                    "DNI"=>$dni,
+                                    "Nombre"=>$nombre,
+                                    "Apellido"=>$apellido,
+                                    "Telefono"=>$telefono,
+                                    "Ocupacion"=>$ocupacion,
+                                    "Direccion"=>$direccion,
+                                    "Codigo"=>$codigo
+                                ];
+
+                                $guardarCliente=clienteModelo::agregar_cliente_modelo($dataCli);
+
+                                if($guardarCliente->rowCount()>=1){
+                                    $alerta = [
+                                        "Alerta" => "limpiar",
+                                        "Titulo" => "Cliente registrado",
+                                        "Texto" => "El cliente se registró con éxito en el sistema",
+                                        "Tipo" => "success"
+                                    ];
+                                }else{
+                                    mainModel::eliminar_cuenta($codigo);
+                                    $alerta = [
+                                        "Alerta" => "simple",
+                                        "Titulo" => "Ocurrió un error inesperado",
+                                        "Texto" => "No hemos podido registrar el cliente, por favor intente nuevamente",
+                                        "Tipo" => "error"
+                                    ];
+                                }
+                            }else{
+                                $alerta = [
+                                    "Alerta" => "simple",
+                                    "Titulo" => "Ocurrió un error inesperado",
+                                    "Texto" => "No hemos podido registrar el cliente, por favor intente nuevamente",
+                                    "Tipo" => "error"
+                                ];
+                            }
                         }
                     }
                 }

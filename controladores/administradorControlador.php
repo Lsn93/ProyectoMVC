@@ -82,9 +82,9 @@ class administradorControlador extends administradorModelo
                             ];
                         } else {
                             $consulta4 = mainModel::ejecutar_consulta_simple("SELECT id FROM cuenta");
-    
+
                             $numero = ($consulta4->rowCount()) + 1;
-    
+
                             $codigo = mainModel::generar_codigo_aleatorio("AC", 7, $numero);
     
                             $clave = mainModel::encryption($password1);
