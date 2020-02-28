@@ -5,7 +5,7 @@
         require_once "./core/mainModel.php";
     }
 
-    class bitacoraModelo extends mainModel{
+    class bitacoraControlador extends mainModel{
 
         public function listado_bitacora_controlador($registros){
             $registros=mainModel::limpiar_cadena($registros);
@@ -29,10 +29,23 @@
                     $NombreCompleto=$datosU['ClienteNombre']." ".$datosU['ClienteApellido'];
                 }
 
-                echo '
-                
-                
+                echo '  
+                <div class="cd-timeline-block">
+                    <div class="cd-timeline-img">
+                        <img src="'.SERVERURL.'vistas/assets/avatars/'.$datosC['CuentaFoto'].'" alt="user-picture">
+                    </div>
+                    <div class="cd-timeline-content">
+                        <h4 class="text-center text-titles">'.$conteo.' - '.$NombreCompleto.' ('.$datosC['CuentaUsuario'].')</h4>
+                        <h4 class="text-center text-titles">'.$rows['BitacoraTipo'].'</h4>
+                        <p class="text-center">
+                            <i class="zmdi zmdi-timer zmdi-hc-fw"></i> Inicio: <em>'.$rows['BitacoraHoraInicio'].'</em> &nbsp;&nbsp;&nbsp;
+                            <i class="zmdi zmdi-time zmdi-hc-fw"></i> Finalización: <em>'.$rows['BitacoraHoraFinal'].'</em>
+                        </p>
+                        <span class="cd-date"><i class="zmdi zmdi-calendar-note zmdi-hc-fw"></i> '.date("d/m/Y",strtotime($rows['BitacoraFecha'])).'</span>
+                    </div>
+                </div>
                 ';
+                $conteo++;
             }
         }
     }
