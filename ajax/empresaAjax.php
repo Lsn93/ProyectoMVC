@@ -1,7 +1,14 @@
 <?php
     $peticionAjax=true;
     require_once "../core/configGeneral.php";
-    if(){
+    if(isset($_POST['dni-reg'])){
+
+        require_once "../controladores/empresaControlador.php";
+        $insEm = new empresaControlador();
+
+        if(isset($_POST['dni-reg']) && isset($_POST['nombre-reg'])){
+            echo $insEm->agregar_empresa_controlador();
+        }
 
         
     }else{

@@ -1,3 +1,4 @@
+<!-- Content Page -->
 <div class="container-fluid">
     <div class="page-header">
         <h1 class="text-titles"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Administración <small>EMPRESA</small></h1>
@@ -27,7 +28,7 @@
             <h3 class="panel-title"><i class="zmdi zmdi-plus"></i> &nbsp; DATOS DE LA EMPRESA</h3>
         </div>
         <div class="panel-body">
-            <form>
+            <form action="<?php echo SERVERURL; ?>ajax/empresaAjax.php" method="POST" data-form="save" class="FormularioAjax" autocomplete="off" enctype="multipart/form-data">
                 <fieldset>
                     <legend><i class="zmdi zmdi-assignment"></i> &nbsp; Datos básicos</legend>
                     <div class="container-fluid">
@@ -73,7 +74,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Nombre del gerente o director *</label>
-                                    <input pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]{1,50}" class="form-control" type="text" name="director-reg" required="" maxlength="50">
+                                    <input pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,50}" class="form-control" type="text" name="director-reg" required="" maxlength="50">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
@@ -95,6 +96,7 @@
                 <p class="text-center" style="margin-top: 20px;">
                     <button type="submit" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Guardar</button>
                 </p>
+                <div class="RespuestaAjax"></div>
             </form>
         </div>
     </div>
