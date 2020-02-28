@@ -286,7 +286,51 @@
         }
 
         public function eliminar_cliente_controlador(){
-            
+            $codigo=mainModel::decryption($_POST['codigo-del']);
+            $privilegio=mainModel::decryption($_POST['privilegio-admin']);
+
+            if($privilegio==1){
+                $DelClient=clienteModelo::eliminar_cliente_modelo($codigo);
+                mainModel::eliminar_bitacora($codigo);
+
+                if($DelClient->rowCount()>=1){
+
+                    $DelCuenta=mainModel::eliminar_cuenta($codigo);
+
+                    if($DelCuenta->rowCount()>=1){
+                        $alerta = [
+                            "Alerta" => "recargar",
+                            "Titulo" => "Cliente eliminado",
+                            "Texto" => "El cliente fue eliminado con éxito",
+                            "Tipo" => "success"
+                        ];
+                    }else{
+                        $alerta = [
+                            "Alerta" => "simple",
+                            "Titulo" => "Ocurrió un error inesperado",
+                            "Texto" => "No podemos eliminar esta cuenta en este momento",
+                            "Tipo" => "error"
+                        ];
+                    }
+
+                }else{
+                    $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto" => "No podemos eliminar este cliente en este momento",
+                        "Tipo" => "error"
+                    ];
+                }
+
+            }else{
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto" => "Tu no tienes los permisos necesarios para realizar esta operación",
+                    "Tipo" => "error"
+                ];
+            }
+            return mainModel::sweet_alert($alerta);
         }
 
 }
