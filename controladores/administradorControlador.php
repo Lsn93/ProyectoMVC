@@ -34,11 +34,11 @@ class administradorControlador extends administradorModelo
 
         if($privilegio<1 || $privilegio>3){
             $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto" => "El nivel de privilegio que intenta asignar es incorrecto",
-                    "Tipo" => "error"
-                ];
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrió un error inesperado",
+                "Texto" => "El nivel de privilegio que intenta asignar es incorrecto",
+                "Tipo" => "error"
+            ];
         }else{
             if ($password1 != $password2) {
                 $alerta = [
