@@ -25,14 +25,14 @@
     </ul>
 </div>
 
-
+<?php if(!isset($_SESSION['busqueda_cliente']) && empty($_SESSION['busqueda_cliente'])): ?>
 <div class="container-fluid">
-    <form class="well">
+    <form class="well FormularioAjax" action="<?php echo SERVERURL; ?>ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off" enctype="multipart/form-data">
         <div class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2">
                 <div class="form-group label-floating">
                     <span class="control-label">¿A quién estas buscando?</span>
-                    <input class="form-control" type="text" name="search_client_init" required="">
+                    <input class="form-control" type="text" name="busqueda_inicial_cliente" required="">
                 </div>
             </div>
             <div class="col-xs-12">
@@ -41,20 +41,22 @@
                 </p>
             </div>
         </div>
+        <div class="RespuestaAjax"></div>
     </form>
 </div>
-
+<?php else: ?>
 <div class="container-fluid">
-    <form class="well">
-        <p class="lead text-center">Su última búsqueda fue <strong>“Busqueda”</strong></p>
+    <form class="well FormularioAjax" action="<?php echo SERVERURL; ?>ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off" enctype="multipart/form-data">
+        <p class="lead text-center">Su última búsqueda fue <strong>"<?php echo $_SESSION['busqueda_cliente'] ?>"</strong></p>
         <div class="row">
-            <input class="form-control" type="hidden" name="search_client_destroy" required="">
+            <input type="hidden" name="eliminar_busqueda_cliente" value="destruir">
             <div class="col-xs-12">
                 <p class="text-center">
                     <button type="submit" class="btn btn-danger btn-raised btn-sm"><i class="zmdi zmdi-delete"></i> &nbsp; Eliminar búsqueda</button>
                 </p>
             </div>
         </div>
+        <div class="RespuestaAjax"></div>
     </form>
 </div>
 
@@ -65,59 +67,14 @@
             <h3 class="panel-title"><i class="zmdi zmdi-search"></i> &nbsp; BUSCAR CLIENTE</h3>
         </div>
         <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table table-hover text-center">
-                    <thead>
-                        <tr>
-                            <th class="text-center">#</th>
-                            <th class="text-center">DNI</th>
-                            <th class="text-center">NOMBRES</th>
-                            <th class="text-center">APELLIDOS</th>
-                            <th class="text-center">TELÉFONO</th>
-                            <th class="text-center">A. CUENTA</th>
-                            <th class="text-center">A. DATOS</th>
-                            <th class="text-center">ELIMINAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>0976541234</td>
-                            <td>Nombres</td>
-                            <td>Apellidos</td>
-                            <td>Telefono</td>
-                            <td>
-                                <a href="#!" class="btn btn-success btn-raised btn-xs">
-                                    <i class="zmdi zmdi-refresh"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="#!" class="btn btn-success btn-raised btn-xs">
-                                    <i class="zmdi zmdi-refresh"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <form>
-                                    <button type="submit" class="btn btn-danger btn-raised btn-xs">
-                                        <i class="zmdi zmdi-delete"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <nav class="text-center">
-                <ul class="pagination pagination-sm">
-                    <li class="disabled"><a href="javascript:void(0)">«</a></li>
-                    <li class="active"><a href="javascript:void(0)">1</a></li>
-                    <li><a href="javascript:void(0)">2</a></li>
-                    <li><a href="javascript:void(0)">3</a></li>
-                    <li><a href="javascript:void(0)">4</a></li>
-                    <li><a href="javascript:void(0)">5</a></li>
-                    <li><a href="javascript:void(0)">»</a></li>
-                </ul>
-            </nav>
+            <?php
+                require_once "./controladores/clienteControlador.php";
+                $insCliente = new clienteControlador();
+
+                $pagina = explode("/", $_GET['views']);
+                echo $insCliente->paginador_cliente_controlador($pagina[1],10,$_SESSION['privilegio_sbp'],$_SESSION['busqueda_cliente']);
+            ?>
         </div>
     </div>
 </div>
+<?php endif; ?>
