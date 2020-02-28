@@ -344,7 +344,58 @@
 
 
         public function actualizar_cliente_controlador(){
-            
+            $cuenta=mainModel::decryption($_POST['cuenta-up']);
+
+            $dni=mainModel::limpiar_cadena($_POST['dni-up']);
+            $nombre=mainModel::decryption($_POST['nombre-up']);
+            $apellido=mainModel::decryption($_POST['apellido-up']);
+            $telefono=mainModel::decryption($_POST['telefono-up']);
+            $ocupacion=mainModel::decryption($_POST['ocupacion-up']);
+            $direccion=mainModel::decryption($_POST['direccion-up']);
+
+            $query1=mainModel::ejecutar_consulta_simple("SELECT * FROM cliente WHERE CuentaCodigo='$cuenta'");
+            $DatosCliente=$query1->fetch();
+
+            if($dni!=$DatosCliente['ClienteDNI']){
+                $consulta1=mainModel::ejecutar_consulta_simple("SELECT ClienteDNI FROM cliente WHERE ClienteDNI='$dni'");
+                if($consulta1->rowCount()>=1){
+                    $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto" => "El DNI que acaba de ingresar ya se encuentra registrado en el sistema",
+                        "Tipo" => "error"
+                    ];
+                    return mainModel::sweet_alert($alerta);
+                    exit();
+                }
+            }
+
+            $dataClient=[
+                "DNI"=>$dni,
+                "Nombre"=>$nombre,
+                "Apellido"=>$apellido,
+                "Telefono"=>$telefono,
+                "Ocupacion"=>$ocupacion,
+                "Direccion"=>$direccion,
+                "Cuenta"=>$cuenta,
+            ];
+
+            if(clienteModelo::actualizar_cliente_modelo($dataClient)){
+                $alerta = [
+                    "Alerta" => "recargar",
+                    "Titulo" => "Datos actualizados",
+                    "Texto" => "Los datos han sido actualizados con éxito",
+                    "Tipo" => "success"
+                ];
+            }else{
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto" => "No hemos podido actualizar los datos del cliente",
+                    "Tipo" => "error"
+                ];
+            }
+            return mainModel::sweet_alert($alerta);
         }
 
 }

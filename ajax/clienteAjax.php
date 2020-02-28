@@ -1,7 +1,7 @@
 <?php
     $peticionAjax=true;
     require_once "../core/configGeneral.php";
-    if(isset($_POST['dni-reg']) || isset($_POST['codigo-del'])){
+    if(isset($_POST['dni-reg']) || isset($_POST['codigo-del']) || isset($_POST['cuenta-up'])){
 
         require_once "../controladores/clienteControlador.php";
         $InsClient= new clienteControlador();
@@ -12,6 +12,10 @@
 
         if(isset($_POST['codigo-del']) && isset($_POST['privilegio-admin'])){
             echo $InsClient->eliminar_cliente_controlador();
+        }
+
+        if(isset($_POST['cuenta-up']) && isset($_POST['dni-up'])){
+            echo $InsClient->actualizar_cliente_controlador();
         }
 
 
