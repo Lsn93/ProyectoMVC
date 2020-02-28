@@ -234,7 +234,7 @@ class administradorControlador extends administradorModelo
                             if($privilegio==1){
                                 $tabla.='
                                 <td>
-                                    <form action="'.SERVERURL.'/ajax/administradorAjax.php" method="POST" class="FormularioAjax" data-form="delete" entype="multipart-form-data" autocomplete="off">
+                                    <form action="'.SERVERURL.'/ajax/administradorAjax.php" method="POST" class="FormularioAjax" data-form="delete" entype="multipart/form-data" autocomplete="off">
                                     <input type="hidden" name="codigo-del" value="'.mainModel::encryption($rows['CuentaCodigo']).'">
                                     <input type="hidden" name="privilegio-admin" value="'.mainModel::encryption($privilegio).'">
                                         <button type="submit" class="btn btn-danger btn-raised btn-xs">
@@ -298,6 +298,7 @@ class administradorControlador extends administradorModelo
 
         return $tabla;
     }
+    
 
     public function eliminar_administrador_controlador(){
             $codigo=mainModel::decryption($_POST['codigo-del']);

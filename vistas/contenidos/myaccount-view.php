@@ -69,7 +69,7 @@
 									</div>
 								</div>
                             </div>
-                            <?php if($_SESSION['tipo_sbp']=="Administrador" && $_SESSION['privilegio_sbp']==1 && $campos['id']!=1):?>
+                            <?php if($_SESSION['tipo_sbp']=="Administrador" && $_SESSION['privilegio_sbp']==1 && $campos['id']!=1): ?>
 							<div class="col-xs-12 col-sm-6">
 								<div class="form-group">
 									<label class="control-label">Estado de la cuenta</label>
