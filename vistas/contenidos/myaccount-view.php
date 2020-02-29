@@ -3,7 +3,7 @@
 	<div class="page-header">
 	  <h1 class="text-titles"><i class="zmdi zmdi-settings zmdi-hc-fw"></i> MI CUENTA</small></h1>
 	</div>
-	<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p>
+	<p class="lead">Actualiza los datos de tu cuenta:</p>
 </div>
 
 <?php
@@ -96,7 +96,7 @@
 		    	<fieldset>
 		    		<legend><i class="zmdi zmdi-lock"></i> &nbsp; Actualizar Contraseña</legend>
 		    		<p>
-		    			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo minima cupiditate tempore nobis. Dolor, blanditiis, mollitia. Alias fuga fugiat molestias debitis odit, voluptatibus explicabo quia sequi doloremque numquam dignissimos quis.
+						Porfavor crea una contraseña segura, de preferencia trata de usar símbolos o caracteres especiales, mayúsculas, minúsculas y números.
 		    		</p>
 		    		<div class="container-fluid">
 		    			<div class="row">
@@ -160,7 +160,7 @@
 				<fieldset>
 		    		<legend><i class="zmdi zmdi-account-circle"></i> &nbsp; Datos de la cuenta</legend>
 		    		<p>
-						Para poder actualizar los datos de la cuenta por favor ingrese su nombre de usuario y contraseña.
+						Para poder actualizar los datos de la cuenta por favor ingrese su nombre de usuario y contraseña actuales.
 		    		</p>
 		    		<div class="container-fluid">
 		    			<div class="row">

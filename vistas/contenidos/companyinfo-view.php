@@ -8,7 +8,7 @@
     <div class="page-header">
         <h1 class="text-titles"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Administración <small>EMPRESA</small></h1>
     </div>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p>
+    <p class="lead">Verifica o actualiza los datos de tu empresa registrada en el sistema:</p>
 </div>
 
 <div class="container-fluid">

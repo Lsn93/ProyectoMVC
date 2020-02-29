@@ -2,7 +2,7 @@
     <div class="page-header">
         <h1 class="text-titles"><i class="zmdi zmdi-book zmdi-hc-fw"></i> INFORMACIÓN LIBRO</small></h1>
     </div>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p>
+    <p class="lead">Información de los libros registrados en el sistema (EN CONSTRUCCIÓN)</p>
 </div>
 
 <!-- Panel info libro -->
