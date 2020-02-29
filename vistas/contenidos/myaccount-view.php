@@ -17,6 +17,7 @@
 		$filesC=$classCuenta->datos_cuenta_controlador($datos[2],$datos[1]);
 
 		if($filesC->rowCount()==1){
+			$campos=$filesC->fetch();
 ?>
 <div class="container-fluid">
 	<div class="panel panel-success">
@@ -34,7 +35,7 @@
                         }
                     }
                 ?>
-                <input type="hidden" name="CodigoCuenta-up" value="<?php echo$datos[2]; ?>">
+                <input type="hidden" name="CodigoCuenta-up" value="<?php echo $datos[2]; ?>">
                 <input type="hidden" name="tipoCuenta-up" value="<?php echo $lc->encryption($datos[1]); ?>">
 		    	<fieldset>
 		    		<legend><i class="zmdi zmdi-key"></i> &nbsp; Datos de la cuenta</legend>
@@ -43,13 +44,13 @@
 		    				<div class="col-xs-12 col-sm-6">
 					    		<div class="form-group label-floating">
 								  	<label class="control-label">Nombre de usuario</label>
-								  	<input pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]{1,15}" class="form-control" type="text" name="usuario-up" value="<?php echo$campos['CuentaUsuario']; ?>" required="" maxlength="15">
+								  	<input pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]{1,15}" class="form-control" type="text" name="usuario-up" value="<?php echo $campos['CuentaUsuario']; ?>" required="" maxlength="15">
 								</div>
 		    				</div>
 		    				<div class="col-xs-12 col-sm-6">
 								<div class="form-group label-floating">
 								  	<label class="control-label">E-mail</label>
-								  	<input class="form-control" type="email" name="email-up" value="<?php echo$campos['CuentaEmail']; ?>" maxlength="50">
+								  	<input class="form-control" type="email" name="email-up" value="<?php echo $campos['CuentaEmail']; ?>" maxlength="50">
 								</div>
 		    				</div>
 		    				<div class="col-xs-12 col-sm-6">
