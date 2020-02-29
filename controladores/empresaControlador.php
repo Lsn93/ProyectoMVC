@@ -213,6 +213,50 @@
 
 
         public function eliminar_empresa_controlador(){
-            
+            $codigo=mainModel::decryption($_POST['codigo-del']);
+            $adminPrivilegio=mainModel::decryption($_POST['privilegio-admin']);
+
+            $codigo=mainModel::limpiar_cadena($codigo);
+            $adminPrivilegio=mainModel::limpiar_cadena($adminPrivilegio);
+
+            if($adminPrivilegio==1){
+                $consulta1=mainModel::ejecutar_consulta_simple("SELECT EmpresaCodigo FROM libro WHERE EmpresaCodigo='$codigo'");
+
+                if($consulta1->rowCount()<=0){
+
+                    $DelEmpresa=empresaModelo::eliminar_empresa_modelo($codigo);
+
+                    if($DelEmpresa->rowCount()==1){
+                        $alerta = [
+                            "Alerta" => "recargar",
+                            "Titulo" => "Empresa eliminada",
+                            "Texto" => "La empresa fue eliminada con éxito",
+                            "Tipo" => "success"
+                        ];
+                    }else{
+                        $alerta = [
+                            "Alerta" => "simple",
+                            "Titulo" => "Ocurrió un error inesperado",
+                            "Texto" => "Lo sentimos, no hemos podido eliminar la empresa",
+                            "Tipo" => "error"
+                        ];
+                    }
+                }else{
+                    $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto" => "Lo sentimos, no podemos eliminar la empresa por que tiene libros asociados",
+                        "Tipo" => "error"
+                    ];
+                }
+            }else{
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto" => "Tu no tienes los permisos necesarios para eliminar registros del sistema",
+                    "Tipo" => "error"
+                ];
+            }
+            return mainModel::sweet_alert($alerta);
         }
     }
