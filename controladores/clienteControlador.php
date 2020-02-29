@@ -142,7 +142,7 @@
             $pagina=mainModel::limpiar_cadena($pagina);
             $registros=mainModel::limpiar_cadena($registros);
             $privilegio=mainModel::limpiar_cadena($privilegio);
-            $budqueda=mainModel::limpiar_cadena($busqueda);
+            $busqueda=mainModel::limpiar_cadena($busqueda);
             $tabla="";
 
             $pagina= (isset($pagina) && $pagina > 0) ? (int) $pagina : 1;
