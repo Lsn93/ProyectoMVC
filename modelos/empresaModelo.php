@@ -34,5 +34,13 @@
             $query->execute();
             return $query;
         }
+
+
+        protected function eliminar_empresa_modelo($codigo){
+            $query=mainModel::conectar()->prepare("DELETE FROM empresa WHERE EmpresaCodigo=:Codigo");
+            $query->bindParam(":Codigo",$codigo);
+            $query->execute();
+            return $query;
+        }
         
     }

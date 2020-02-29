@@ -210,4 +210,9 @@
 
             return $tabla;
         }
+
+
+        public function eliminar_empresa_controlador(){
+            
+        }
     }
