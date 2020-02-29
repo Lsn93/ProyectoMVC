@@ -42,5 +42,21 @@
             $query->execute();
             return $query;
         }
+
+
+        protected function actualizar_empresa_modelo($datos){
+            $query=mainModel::conectar()->prepare("UPDATE empresa SET EmpresaCodigo=:Codigo,EmpresaNombre=:Nombre,EmpresaTelefono=:Telefono,EmpresaEmail=:Email,EmpresaDireccion=:Direccion,EmpresaDirector=:Director,EmpresaMoneda=:Moneda,EmpresaYear=:Year WHERE id=:ID");
+            $query->bindParam(":Codigo",$datos['Codigo']);
+            $query->bindParam(":Nombre",$datos['Nombre']);
+            $query->bindParam(":Telefono",$datos['Telefono']);
+            $query->bindParam(":Email",$datos['Email']);
+            $query->bindParam(":Direccion",$datos['Direccion']);
+            $query->bindParam(":Director",$datos['Director']);
+            $query->bindParam(":Moneda",$datos['Moneda']);
+            $query->bindParam(":Year",$datos['Year']);
+            $query->bindParam(":ID",$datos['ID']);
+            $query->execute();
+            return $query;
+        }
         
     }
